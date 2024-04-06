@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import axios from 'axios'; // Asegúrate de tener axios instalado
 
-interface FilmsState {
+export interface Film {
     title: string;
     episode_id: number;
     opening_crawl: string;
@@ -19,14 +19,14 @@ interface FilmsState {
     url: string;
 }
 
-const initialState: FilmsState[] = [];
+const initialState: Film[] = [];
 
 // Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchFilms = createAsyncThunk(
   'films/fetchFilms',
   async () => {
     const response = await axios.get('http://localhost:8000/films');
-    return response.data; // Devuelve los datos de la respuesta
+    return response.data.data.results; // Devuelve los datos de la respuesta
   }
 );
 

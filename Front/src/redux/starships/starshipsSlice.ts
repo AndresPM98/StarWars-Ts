@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import axios from 'axios'; // Asegúrate de tener axios instalado
 
-interface StarshipsState {
+export interface Starship {
         name: string;
         model: string;
         manufacturer: string;
@@ -23,14 +23,14 @@ interface StarshipsState {
         url: string;
     }
 
-const initialState: StarshipsState[] = [];
+const initialState: Starship[] = [];
 
 // Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchStarships = createAsyncThunk(
   'starships/fetchStarships',
   async () => {
     const response = await axios.get('http://localhost:8000/starships');
-    return response.data; // Devuelve los datos de la respuesta
+    return response.data.data.results; // Devuelve los datos de la respuesta
   }
 );
 

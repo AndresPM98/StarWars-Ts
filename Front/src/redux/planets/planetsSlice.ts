@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import axios from 'axios'; // Asegúrate de tener axios instalado
 
-interface PlanetsState {
+export interface Planet {
     name: string;
     rotation_period: string;
     orbital_period: string;
@@ -19,14 +19,14 @@ interface PlanetsState {
     url: string;
 }
 
-const initialState: PlanetsState[] = [];
+const initialState: Planet[] = [];
 
 // Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchPlanets = createAsyncThunk(
   'planets/fetchPlanets',
   async () => {
     const response = await axios.get('http://localhost:8000/planets');
-    return response.data; // Devuelve los datos de la respuesta
+    return response.data.data.results; // Devuelve los datos de la respuesta
   }
 );
 

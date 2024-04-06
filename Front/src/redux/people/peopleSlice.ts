@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import axios from 'axios'; // Asegúrate de tener axios instalado
 
-interface PeopleState {
+export interface People {
     name: string;
     height: string;
     mass: string;
@@ -21,14 +21,14 @@ interface PeopleState {
     url: string;
 }
 
-const initialState: PeopleState[] = [];
+const initialState: People[] = [];
 
 // Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchPeople = createAsyncThunk(
   'people/fetchPeople',
   async () => {
     const response = await axios.get('http://localhost:8000/people');
-    return response.data; // Devuelve los datos de la respuesta
+    return response.data.data; // Devuelve los datos de la respuesta
   }
 );
 

@@ -1,4 +1,4 @@
-import Home from "./views/Home";
+import { Home } from "./views/Home";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { fetchFilms, selectFilms, Film } from "./redux/films/filmsSlice";
@@ -52,7 +52,7 @@ if (loading) {
 
 
   return (
-    <div className="h-[100dvh] p-5">
+    <div>
       <Home films={films} people={people} planets={planets} starships={starships}/>
     </div>
   );

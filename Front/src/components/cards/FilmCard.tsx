@@ -8,6 +8,7 @@ import StarWars6 from "../../assets/starwars6.jpg";
 
 interface FilmCardProps {
     film: Film;
+    onClick: () => void;
 }
 
 const episodeImages: Record<number, string> = {
@@ -17,15 +18,14 @@ const episodeImages: Record<number, string> = {
     4: StarWars4,
     5: StarWars5,
     6: StarWars6,
-    // Agrega más imágenes si es necesario
   };
 
-export function FilmCard({ film }: FilmCardProps) {
+export function FilmCard({ film, onClick }: FilmCardProps) {
 
     const episodeImage = episodeImages[film.episode_id] || StarWars1;
 
     return (
-        <div className="w-[50rem] border rounded-md p-5 mb-5 flex">
+        <div className="w-[50rem] border rounded-md p-5 mb-5 flex cursor-pointer hover:transform hover:scale-105 hover: shadow-md" onClick={onClick}>
             <div className="mr-5">
                 <img className="w-[800px] h-auto" src={episodeImage} alt={`Star Wars Episode ${film.episode_id}`} />
             </div>

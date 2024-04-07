@@ -3,6 +3,7 @@ import type { RootState } from '../store';
 import axios from 'axios'; // Asegúrate de tener axios instalado
 
 export interface Film {
+    _id: string;
     title: string;
     episode_id: number;
     opening_crawl: string;
@@ -26,7 +27,9 @@ export const fetchFilms = createAsyncThunk(
   'films/fetchFilms',
   async () => {
     const response = await axios.get('http://localhost:8000/films');
-    return response.data.data.results; // Devuelve los datos de la respuesta
+    console.log(response);
+    
+    return response.data.data; // Devuelve los datos de la respuesta
   }
 );
 

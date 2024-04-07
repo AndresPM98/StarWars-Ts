@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
-var baseUrl = 'https://swapi.dev/api/films';
+var baseUrl = 'http://localhost:8005/Film/';
 var getData = function (url) { return __awaiter(void 0, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {

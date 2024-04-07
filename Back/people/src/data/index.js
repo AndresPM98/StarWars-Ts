@@ -37,27 +37,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
-exports.default = {
+var baseUrl = 'http://localhost:8005/Character/';
+var getData = function (url) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, axios_1.default.get(url)];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response.data];
+        }
+    });
+}); };
+var data = {
     list: function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1.default.get("http://swapi.dev/api/people")];
+                case 0: return [4 /*yield*/, getData(baseUrl)];
                 case 1:
                     response = _a.sent();
-                    return [2 /*return*/, response.data.results];
-            }
-        });
-    }); },
-    getById: function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1.default.get("http://swapi.dev/api/people/".concat(id))];
-                case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response.data];
+                    return [2 /*return*/, response];
             }
         });
     }); }
 };
+exports.default = data;

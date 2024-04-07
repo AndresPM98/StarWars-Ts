@@ -19,13 +19,25 @@ interface People {
     url: string;
 }
 
-export default {
-    list: async (): Promise<People[]> => {
-        const response: AxiosResponse<{ results: People[] }> = await axios.get("http://swapi.dev/api/people");
-        return response.data.results;
-    },
-    getById: async (id: number): Promise<People> => {
-        const response: AxiosResponse<People> = await axios.get(`http://swapi.dev/api/people/${id}`);
-        return response.data;
+interface SwapiResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: People[];
+}
+
+const baseUrl: string = 'http://localhost:8005/Character/';
+
+const getData = async <T>(url: string): Promise<T> => {
+    const response: AxiosResponse<T> = await axios.get(url);
+    return response.data;
+};
+
+const data = {
+    list: async (): Promise<SwapiResponse> => {
+        const response: SwapiResponse = await getData(baseUrl);
+        return response;
     }
 };
+
+export default data;

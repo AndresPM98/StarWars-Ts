@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { catchedAsync } from '../../utils';
+import { catchedAsync } from '../utils';
 import getStarships from './getStarships';
 
 interface Controller {

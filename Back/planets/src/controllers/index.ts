@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { catchedAsync } from '../../utils';
+import { catchedAsync } from '../utils';
 import getPlanetByName from './getPlanetByName';
 import getPlanets from './getPlanets';
 

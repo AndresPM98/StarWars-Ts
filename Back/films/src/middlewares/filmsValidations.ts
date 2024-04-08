@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ClientError } from '../../utils/errors';
+import { ClientError } from '../utils/errors';
 
 const filmsValidationMiddleware = (req: Request, res: Response, next: NextFunction): void => {
     const { title } = req.body;

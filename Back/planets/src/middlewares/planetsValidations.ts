@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ClientError } from '../../utils/errors';
+import { ClientError } from '../utils/errors';
 
 const planetValidationMiddleware = (req: Request, res: Response, next: NextFunction): void => {
     const { name } = req.body;

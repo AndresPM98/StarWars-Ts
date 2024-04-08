@@ -42,10 +42,10 @@ app.use("/database", createProxyMiddleware({
 
 // Función para iniciar los microservicios en los puertos 8000, 8001, 8002, 8003 y 8004
 const startMicroservices = () => {
-    const microserviceFilms = spawn("node", ["../films/index.js"]);
-    const microservicePeople = spawn("node", ["../people/index.js"]);
-    const microservicePlanets = spawn("node", ["../planets/index.js"]);
-    const microserviceStarships = spawn("node", ["../starships/index.js"]);
+    const microserviceFilms = spawn("node", ["../films/dist/index.js"]);
+    const microservicePeople = spawn("node", ["../people/dist/index.js"]);
+    const microservicePlanets = spawn("node", ["../planets/dist/index.js"]);
+    const microserviceStarships = spawn("node", ["../starships/dist/index.js"]);
     const microserviceDatabase = spawn("node", ["../database/index.js"]);
 
     microserviceFilms.stdout.on("data", (data: any) => {

@@ -1,4 +1,4 @@
-import server from "./src/server";
+import server from "./server";
 
 const PORT = 8004;
 

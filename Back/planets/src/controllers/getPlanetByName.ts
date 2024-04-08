@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Planet from '../data';
-import { response } from '../../utils';
+import { response } from '../utils';
 
 export default async (req: Request, res: Response): Promise<void> => {
     try {

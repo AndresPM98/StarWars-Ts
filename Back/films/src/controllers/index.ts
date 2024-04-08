@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { catchedAsync } from '../../utils';
+import { catchedAsync } from '../utils';
 import getFilms from './getFilms';
 import getFilmByTitle from './getFilmByTitle';
 

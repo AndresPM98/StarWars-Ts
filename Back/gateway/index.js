@@ -28,12 +28,17 @@ app.use("/starships", createProxyMiddleware({
     target: "http://localhost:8004",
     changeOrigin: true,
 }));
+app.use("/database", createProxyMiddleware({
+    target: "http://localhost:8005",
+    changeOrigin: true,
+}));
 // Función para iniciar los microservicios en los puertos 8003 y 8002
 var startMicroservices = function () {
     var microserviceFilms = spawn("node", ["../films/index.js"]);
     var microservicePeople = spawn("node", ["../people/index.js"]);
     var microservicePlanets = spawn("node", ["../planets/index.js"]);
     var microserviceStarships = spawn("node", ["../starships/index.js"]);
+    var microserviceDatabase = spawn("node", ["../database/index.js"]);
     microserviceFilms.stdout.on("data", function (data) {
         console.log("Films microservice: ".concat(data));
     });
@@ -56,6 +61,12 @@ var startMicroservices = function () {
         console.log("Starships microservice: ".concat(data));
     });
     microserviceStarships.stderr.on("data", function (data) {
+        console.error("Error in starships microservice: ".concat(data));
+    });
+    microserviceDatabase.stdout.on("data", function (data) {
+        console.log("Starships microservice: ".concat(data));
+    });
+    microserviceDatabase.stderr.on("data", function (data) {
         console.error("Error in starships microservice: ".concat(data));
     });
 };

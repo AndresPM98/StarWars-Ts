@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install-deps": "cd gateway && npm install && cd .. && npm run install-microservices",
+    "install-microservices": "npm install --prefix ../films && npm install --prefix ../people && npm install --prefix ../planets && npm install --prefix ../starships && npm install --prefix ../database",
+    "start-microservices": "node ../films/index.js & node ../people/index.js & node ../planets/index.js & node ../starships/index.js & node ../database/index.js",
     "start": "node index.js"
   },
   "keywords": [],

@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const { MONGO_URI } = require("../config/envs");
 const { characterSchema, filmSchema, planetSchema } = require("./schemas");
 
-const conn = mongoose.createConnection(MONGO_URI);
+const conn = mongoose.createConnection('mongodb://localhost:27017/starwars');
 
 module.exports = {
     Character: conn.model("Character", characterSchema),

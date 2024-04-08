@@ -21,9 +21,7 @@ const episodeImages: Record<string, string> = {
 };
 
 export function FilmCard({ film, onClick }: FilmCardProps) {
-    // Obtener el ID de la película y convertirlo a cadena
     const episodeId = film._id.toString();
-    // Obtener la imagen correspondiente al ID de la película o usar la primera imagen como predeterminada
     const episodeImage = episodeImages[episodeId] || StarWars1;
 
     return (

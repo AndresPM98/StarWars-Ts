@@ -25,7 +25,7 @@ characterSchema.statics.list = async function () {
          // Verificar si el personaje ya existe en la base de datos local
          const existingCharacter = await this.findOne({ _id: characterData.url.split('/').slice(-2, -1)[0] });
          if (!existingCharacter) {
-            // Si el personaje no existe, crear una nueva instancia y guardarla en la base de datos
+            // Si el personaje no existe, crear una nueva instancia y la guardar en la base de datos
             const newCharacter = await this.create({
                _id: characterData.url.split('/').slice(-2, -1)[0],
                name: characterData.name,
@@ -59,7 +59,6 @@ characterSchema.statics.list = async function () {
          }
       }));
 
-      // Devolver los datos de los personajes
       return characters;
    } catch (error) {
       console.error('Error al obtener personajes desde la API:', error);

@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import axios from 'axios'; // Asegúrate de tener axios instalado
+import axios from 'axios'; 
 
 export interface Starship {
         name: string;
@@ -25,12 +25,11 @@ export interface Starship {
 
 const initialState: Starship[] = [];
 
-// Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchStarships = createAsyncThunk(
   'starships/fetchStarships',
   async () => {
     const response = await axios.get('http://localhost:8000/starships');
-    return response.data.data.results; // Devuelve los datos de la respuesta
+    return response.data.data.results; 
   }
 );
 
@@ -38,7 +37,6 @@ const starshipsSlice = createSlice({
   name: 'starships',
   initialState,
   reducers: {
-    // Aquí puedes definir otras acciones síncronas si es necesario
   },
   extraReducers: (builder) => {
     builder.addCase(fetchStarships.fulfilled, (state, action) => {
@@ -48,9 +46,9 @@ const starshipsSlice = createSlice({
   },
 });
 
-// Exporta tus acciones y el reducer
+// Exporta acciones y el reducer
 export const starshipsActions = starshipsSlice.actions;
 export default starshipsSlice.reducer;
 
-// Define tus selectores aquí si los necesitas
+// Define selectores 
 export const selectStarships = (state: RootState) => state.starships;

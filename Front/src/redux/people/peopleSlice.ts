@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import axios from 'axios'; // Asegúrate de tener axios instalado
+import axios from 'axios'; 
 
 export interface People {
     name: string;
@@ -31,21 +31,19 @@ const initialState: PeopleState = {
   singlePeople: null,
 };
 
-// Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchPeople = createAsyncThunk(
   'people/fetchPeople',
   async () => {
     const response = await axios.get('http://localhost:8000/people');
-    return response.data.data; // Devuelve los datos de la respuesta
+    return response.data.data; 
   }
 );
 
-// Define la acción asincrónica para obtener una persona por su nombre
 export const fetchPeopleByName = createAsyncThunk(
   'people/fetchPeopleByName',
   async (name: string) => {
     const response = await axios.get(`http://localhost:8000/people/${encodeURIComponent(name)}`);
-    return response.data.data; // Devuelve los datos de la respuesta
+    return response.data.data;
   }
 );
 
@@ -53,7 +51,6 @@ const peopleSlice = createSlice({
   name: 'people',
   initialState,
   reducers: {
-    // Aquí puedes definir otras acciones síncronas si es necesario
   },
   extraReducers: (builder) => {
     builder
@@ -62,17 +59,16 @@ const peopleSlice = createSlice({
       state.allPeople = action.payload;
     })
     .addCase(fetchPeopleByName.fulfilled, (state, action) => {
-      // Actualiza el estado con la película individual obtenida
       state.singlePeople = action.payload;
     });
   },
 });
 
-// Exporta tus acciones y el reducer
+// Exporta acciones y el reducer
 export const peopleActions = peopleSlice.actions;
 export default peopleSlice.reducer;
 
-// Define tus selectores aquí si los necesitas
+// Define selectores 
 export const selectPeople = (state: RootState) => state.people.allPeople;
 export const selectSinglePeople = (state: RootState) => state.people.singlePeople;
 

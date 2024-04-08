@@ -11,7 +11,6 @@ server.use(morgan('dev'));
 
 server.use(cors());
 
-// Aquí es donde se define la ruta '/planets'
 server.use('/planets', routes);
 
 server.use('*', (req: Request, res: Response) => {

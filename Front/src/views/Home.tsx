@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Film, fetchFilmByTitle, selectSingleFilm } from "../redux/films/filmsSlice";
 import { People, fetchPeopleByName, selectSinglePeople } from "../redux/people/peopleSlice";
 import { Planet, fetchPlanetByName, selectSinglePlanet } from "../redux/planets/planetsSlice";
@@ -58,30 +58,21 @@ export function Home({
         event.preventDefault();
         if (selectedOption === "Films") {
             try {
-                // Realiza la solicitud al endpoint para buscar una película por título
                 await dispatch(fetchFilmByTitle(searchTitle));
-                // Aquí puedes actualizar el estado o realizar alguna acción adicional
             } catch (error) {
                 console.error("Error al buscar película por título:", error);
-                // Maneja el error si lo necesitas
             }
         } else  if (selectedOption === "People") {
             try {
-                // Realiza la solicitud al endpoint para buscar una película por título
                 await dispatch(fetchPeopleByName(searchName));
-                // Aquí puedes actualizar el estado o realizar alguna acción adicional
             } catch (error) {
                 console.error("Error al buscar personas por nombre:", error);
-                // Maneja el error si lo necesitas
             }
         } else  if (selectedOption === "Planets") {
             try {
-                // Realiza la solicitud al endpoint para buscar una película por título
                 await dispatch(fetchPlanetByName(searchName));
-                // Aquí puedes actualizar el estado o realizar alguna acción adicional
             } catch (error) {
                 console.error("Error al buscar planetas por nombre:", error);
-                // Maneja el error si lo necesitas
             }
         }
     };

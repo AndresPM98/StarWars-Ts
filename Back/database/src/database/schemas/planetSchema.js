@@ -17,15 +17,14 @@ const planetSchema = new Schema({
 
 planetSchema.statics.list = async function () {
    try {
-      // Realizar solicitud GET a la API externa
+
       const response = await axios.get('https://swapi.dev/api/planets');
 
-      // Guardar los datos de los planetas en la base de datos local
       const planets = await Promise.all(response.data.results.map(async planetData => {
          // Verificar si el planeta ya existe en la base de datos local
          const existingPlanet = await this.findOne({ _id: planetData.url.split('/').slice(-2, -1)[0] });
          if (!existingPlanet) {
-            // Si el planeta no existe, crear una nueva instancia y guardarla en la base de datos
+            // Si el planeta no existe, crear una nueva instancia y lo guardar en la base de datos
             const newPlanet = await this.create({
                _id: planetData.url.split('/').slice(-2, -1)[0],
                name: planetData.name,
@@ -41,7 +40,7 @@ planetSchema.statics.list = async function () {
             });
             return newPlanet;
          } else {
-            // Si el planeta ya existe, actualizar sus datos
+            // Si el planeta ya existe, actualiza sus datos
             existingPlanet.set({
                name: planetData.name,
                rotation_period: planetData.rotation_period,
@@ -59,7 +58,6 @@ planetSchema.statics.list = async function () {
          }
       }));
 
-      // Devolver los datos de los planetas
       return planets;
    } catch (error) {
       console.error('Error al obtener planetas desde la API:', error);

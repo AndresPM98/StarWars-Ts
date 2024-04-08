@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import controllers from '../controllers'; // Importa el objeto controllers
+import controllers from '../controllers'; 
 
 const router = Router();
 
-router.get('/', controllers.getPeople); // Usa controllers.getPlanets
+router.get('/', controllers.getPeople); 
 router.get('/:name', controllers.getPeopleByName); 
 
 export default router;

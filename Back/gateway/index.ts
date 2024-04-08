@@ -7,7 +7,6 @@ const cors = require("cors");
 
 const app: Express = express();
 
-// Habilitar CORS para permitir solicitudes desde cualquier origen
 app.use(cors());
 
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +40,7 @@ app.use("/database", createProxyMiddleware({
 }));
 
 
-// Función para iniciar los microservicios en los puertos 8003 y 8002
+// Función para iniciar los microservicios en los puertos 8000, 8001, 8002, 8003 y 8004
 const startMicroservices = () => {
     const microserviceFilms = spawn("node", ["../films/index.js"]);
     const microservicePeople = spawn("node", ["../people/index.js"]);

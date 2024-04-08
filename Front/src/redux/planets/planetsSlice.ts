@@ -19,14 +19,31 @@ export interface Planet {
     url: string;
 }
 
-const initialState: Planet[] = [];
+interface PlanetsState {
+  allPlanets: Planet[];
+  singlePlanet: Planet | null;
+}
+
+const initialState: PlanetsState = {
+  allPlanets: [],
+  singlePlanet: null,
+};
 
 // Define la acción asincrónica para hacer la solicitud HTTP
 export const fetchPlanets = createAsyncThunk(
   'planets/fetchPlanets',
   async () => {
     const response = await axios.get('http://localhost:8000/planets');
-    return response.data.data.results; // Devuelve los datos de la respuesta
+    return response.data.data; // Devuelve los datos de la respuesta
+  }
+);
+
+// Define la acción asincrónica para obtener un planeta por su nombre
+export const fetchPlanetByName = createAsyncThunk(
+  'planets/fetchPlanetByName',
+  async (name: string) => {
+    const response = await axios.get(`http://localhost:8000/planets/${encodeURIComponent(name)}`);
+    return response.data.data; // Devuelve los datos de la respuesta
   }
 );
 
@@ -37,9 +54,14 @@ const planetsSlice = createSlice({
     // Aquí puedes definir otras acciones síncronas si es necesario
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchPlanets.fulfilled, (state, action) => {
+    builder
+    .addCase(fetchPlanets.fulfilled, (state, action) => {
       // Actualiza el estado con los datos de la respuesta
-      return action.payload;
+      state.allPlanets = action.payload;
+    })
+    .addCase(fetchPlanetByName.fulfilled, (state, action) => {
+      // Actualiza el estado con la película individual obtenida
+      state.singlePlanet = action.payload;
     });
   },
 });
@@ -49,5 +71,6 @@ export const planetsActions = planetsSlice.actions;
 export default planetsSlice.reducer;
 
 // Define tus selectores aquí si los necesitas
-export const selectPlanets = (state: RootState) => state.planets;
+export const selectPlanets = (state: RootState) => state.planets.allPlanets;
+export const selectSinglePlanet = (state: RootState) => state.planets.singlePlanet;
 

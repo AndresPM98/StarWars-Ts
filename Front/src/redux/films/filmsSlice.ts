@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import axios from 'axios'; // Asegúrate de tener axios instalado
+import axios from 'axios'; 
 
 export interface Film {
     _id: string;
@@ -20,15 +20,30 @@ export interface Film {
     url: string;
 }
 
-const initialState: Film[] = [];
+interface FilmsState {
+    allFilms: Film[];
+    singleFilm: Film | null;
+}
 
-// Define la acción asincrónica para hacer la solicitud HTTP
-export const fetchFilms = createAsyncThunk(
-  'films/fetchFilms',
+const initialState: FilmsState = {
+    allFilms: [],
+    singleFilm: null,
+};
+
+// Define la acción asincrónica para obtener todas las películas
+export const fetchAllFilms = createAsyncThunk(
+  'films/fetchAllFilms',
   async () => {
     const response = await axios.get('http://localhost:8000/films');
-    console.log(response);
-    
+    return response.data.data; // Devuelve los datos de la respuesta
+  }
+);
+
+// Define la acción asincrónica para obtener una película por su título
+export const fetchFilmByTitle = createAsyncThunk(
+  'films/fetchFilmByTitle',
+  async (title: string) => {
+    const response = await axios.get(`http://localhost:8000/films/${encodeURIComponent(title)}`);
     return response.data.data; // Devuelve los datos de la respuesta
   }
 );
@@ -40,10 +55,15 @@ const filmsSlice = createSlice({
     // Aquí puedes definir otras acciones síncronas si es necesario
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchFilms.fulfilled, (state, action) => {
-      // Actualiza el estado con los datos de la respuesta
-      return action.payload;
-    });
+    builder
+      .addCase(fetchAllFilms.fulfilled, (state, action) => {
+        // Actualiza el estado con las películas obtenidas
+        state.allFilms = action.payload;
+      })
+      .addCase(fetchFilmByTitle.fulfilled, (state, action) => {
+        // Actualiza el estado con la película individual obtenida
+        state.singleFilm = action.payload;
+      });
   },
 });
 
@@ -52,4 +72,5 @@ export const filmsActions = filmsSlice.actions;
 export default filmsSlice.reducer;
 
 // Define tus selectores aquí si los necesitas
-export const selectFilms = (state: RootState) => state.films;
+export const selectAllFilms = (state: RootState) => state.films.allFilms;
+export const selectSingleFilm = (state: RootState) => state.films.singleFilm;

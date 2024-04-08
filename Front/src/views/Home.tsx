@@ -200,7 +200,7 @@ export function Home({
                 />
             ) : (
                 <>
-                    <div className="h-[5rem] mb-5 flex justify-evenly items-center bg-blue-100">
+                    <div className="h-[5rem] flex justify-around items-center bg-black">
                         <Select options={options} onChange={handleOptionChange} />
                         {selectedOption === "Films" && (
                             <form onSubmit={handleSubmit}>
@@ -208,9 +208,10 @@ export function Home({
                                     type="text"
                                     value={searchTitle}
                                     onChange={handleInputTitleChange}
+                                    className="h-[2rem] w-[15rem] rounded-sm px-2"
                                     placeholder="Buscar por título"
                                 />
-                                <button type="submit">Buscar</button>
+                                <button type="submit" className="bg-yellow-300 h-[2rem] w-[5rem] px-2 ml-2 rounded-sm">Buscar</button>
                             </form>
                         )}
                         {selectedOption === "People" && (
@@ -219,9 +220,10 @@ export function Home({
                                     type="text"
                                     value={searchName}
                                     onChange={handleInputNameChange}
+                                    className="h-[2rem] w-[15rem] rounded-sm px-2"
                                     placeholder="Buscar por nombre"
                                 />
-                                <button type="submit">Buscar</button>
+                                <button type="submit" className="bg-yellow-300 h-[2rem] w-[5rem] px-2 ml-2  rounded-sm">Buscar</button>
                             </form>
                         )}
                         {selectedOption === "Planets" && (
@@ -230,13 +232,14 @@ export function Home({
                                     type="text"
                                     value={searchName}
                                     onChange={handleInputNameChange}
+                                    className="h-[2rem] w-[15rem] rounded-sm px-2"
                                     placeholder="Buscar por nombre"
                                 />
-                                <button type="submit">Buscar</button>
+                                <button type="submit" className="bg-yellow-300 h-[2rem] w-[5rem] px-2 ml-2  rounded-sm">Buscar</button>
                             </form>
                         )}
                     </div>
-                    <div className="w-full flex flex-col items-center">
+                    <div className="w-full flex flex-col items-center bg-yellow-300 pt-5">
                         {componentToRender}
                     </div>
                 </>

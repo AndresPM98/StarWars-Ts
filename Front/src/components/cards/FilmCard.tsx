@@ -27,7 +27,7 @@ export function FilmCard({ film, onClick }: FilmCardProps) {
     const episodeImage = episodeImages[episodeId] || StarWars1;
 
     return (
-        <div className="w-[50rem] border rounded-md p-5 mb-5 flex cursor-pointer hover:transform hover:scale-105 hover: shadow-md" onClick={onClick}>
+        <div className="w-[50rem] bg-white border rounded-md p-5 mb-5 flex cursor-pointer hover:transform hover:scale-105 hover: shadow-md" onClick={onClick}>
             <div className="mr-5">
                 <img className="w-[800px] h-auto" src={episodeImage} alt={`Star Wars Episode ${episodeId}`} />
             </div>

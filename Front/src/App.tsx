@@ -6,6 +6,7 @@ import { fetchPeople, selectPeople, People } from "./redux/people/peopleSlice";
 import { fetchPlanets, selectPlanets, Planet } from "./redux/planets/planetsSlice";
 import { fetchStarships, selectStarships, Starship } from "./redux/starships/starshipsSlice";
 import { Loader } from "./components/loader/Loader";
+import StarWarsImg from "../src/assets/starwars.jpeg";
 
 function App() {
 
@@ -48,8 +49,14 @@ function App() {
   // Si loading es true, muestra el componente de carga
   if (loading) {
     return (
-      <div className="h-[100vh] flex items-center justify-center">
-        <Loader/>
+      <div
+        className="h-screen w-screen flex "
+        style={{ backgroundImage: `url(${StarWarsImg})`, backgroundSize: "cover" }}
+      >
+        <div className="flex h-screen w-screen items-end justify-center pb-[2rem]">
+          <Loader />
+        </div>
+        
       </div>
     );
   }

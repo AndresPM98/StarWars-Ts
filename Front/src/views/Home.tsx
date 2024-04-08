@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Film, fetchFilmByTitle, selectSingleFilm } from "../redux/films/filmsSlice";
 import { People, fetchPeopleByName, selectSinglePeople } from "../redux/people/peopleSlice";
 import { Planet, fetchPlanetByName, selectSinglePlanet } from "../redux/planets/planetsSlice";
@@ -8,6 +8,7 @@ import { GeneralCard } from "../components/cards/GeneralCard";
 import { InfoDetail } from "./InfoDetail";
 import { Select } from "../components/Select";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Loader } from "../components/loader/Loader";
 
 export function Home({
     films,
@@ -26,6 +27,7 @@ export function Home({
     const peopleByName: People[] = useAppSelector((state) => selectSinglePeople(state)) as People[];
     const planetByName: Planet[] = useAppSelector((state) => selectSinglePlanet(state)) as Planet[];
     
+    const [loading, setLoading] = useState(true);
     const [renderDetail, setRenderDetail] = useState(false);
     const [selectedItem, setSelectedItem] = useState< Film | People | Planet | Starship | null >(null);
     const [selectedOption, setSelectedOption] = useState<string | null>("Films");
@@ -58,18 +60,21 @@ export function Home({
         event.preventDefault();
         if (selectedOption === "Films") {
             try {
+                setLoading(true)
                 await dispatch(fetchFilmByTitle(searchTitle));
             } catch (error) {
                 console.error("Error al buscar película por título:", error);
             }
         } else  if (selectedOption === "People") {
             try {
+                setLoading(true)
                 await dispatch(fetchPeopleByName(searchName));
             } catch (error) {
                 console.error("Error al buscar personas por nombre:", error);
             }
         } else  if (selectedOption === "Planets") {
             try {
+                setLoading(true)
                 await dispatch(fetchPlanetByName(searchName));
             } catch (error) {
                 console.error("Error al buscar planetas por nombre:", error);
@@ -77,12 +82,27 @@ export function Home({
         }
     };
 
+    useEffect(() => {
+       
+    if( films.length > 0 || people.length > 0 || planets.length > 0 || starships.length > 0){
+        setLoading(false)
+    } else if(filmByTitle || peopleByName || planetByName){
+        setLoading(false)
+    }
+      }, [dispatch, films, people, planets, starships,filmByTitle, peopleByName, planetByName,]);
+
     let componentToRender;
     const options = ["Films", "People", "Planets", "Starships"];
 
-    if (selectedOption === "Films") {
+    if (loading) {
         componentToRender = (
-            <>
+            <div className="h-[80vh] flex items-center justify-center">
+                <Loader/>
+            </div>
+        );
+    } else if (selectedOption === "Films") {
+        componentToRender = (
+            <div className="h-full">
                 {filmByTitle ? (
                     // Si filmByTitle no es nulo, mapea filmByTitle en lugar de films
                     filmByTitle.map((film, index) => (
@@ -106,11 +126,11 @@ export function Home({
                         <div>No hay películas disponibles</div>
                     )
                 )}
-            </>
+            </div>
         );
     } else if (selectedOption === "People") {
         componentToRender = (
-            <>
+            <div className="h-full">
                 {peopleByName ? (
                     // Si peopleByName no es nulo, mapea peopleByName en lugar de people
                     peopleByName.map((person, index) => (
@@ -134,11 +154,11 @@ export function Home({
                         <div>No hay personas disponibles</div>
                     )
                 )}
-            </>
+            </div>
         );
     } else if (selectedOption === "Planets") {
         componentToRender = (
-            <>
+            <div className="h-full">
                 {planetByName ? (
                     // Si planetByName no es nulo, mapea planetByName en lugar de planet
                     planetByName.map((planet, index) => (
@@ -162,11 +182,11 @@ export function Home({
                         <div>No hay planetas disponibles</div>
                     )
                 )}
-            </>
+            </div>
         );
     } else if (selectedOption === "Starships") {
         componentToRender = (
-            <>
+            <div className="h-full">
                 {starships.length > 0 ? (
                     starships.map((starship, index) => (
                         <GeneralCard
@@ -178,7 +198,7 @@ export function Home({
                 ) : (
                     <div>No hay naves espaciales disponibles</div>
                 )}
-            </>
+            </div>
         );
     }
 
@@ -230,7 +250,7 @@ export function Home({
                             </form>
                         )}
                     </div>
-                    <div className="w-full flex flex-col items-center bg-yellow-300 pt-5">
+                    <div className="min-h-[100vh] w-full flex flex-col items-center bg-yellow-300 pt-5">
                         {componentToRender}
                     </div>
                 </>

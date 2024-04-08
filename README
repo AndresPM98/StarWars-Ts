@@ -26,9 +26,11 @@ Para inicializar los servidores, sigue los siguientes pasos:
 Una vez completados estos pasos, los servidores estarán en funcionamiento.
 
 --- Front ---
+
 La carpeta Front contiene el frontend de la aplicación desarrollado con React utilizando Vite, TypeScript y React Redux.
 
-Instrucciones de Inicialización del Frontend
+--- Instrucciones de Inicialización del Frontend ---
+
 Para inicializar el frontend, sigue estos pasos:
 
 1) Abre una terminal en la carpeta Front.

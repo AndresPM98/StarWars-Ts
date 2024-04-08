@@ -64,6 +64,19 @@ filmSchema.statics.get = async function (id) {
       .populate("planets", ["_id", "name"])
 };
 
+filmSchema.statics.searchByTitle = async function (title) {
+   try {
+      const film = await this.find({ title: { $regex: new RegExp(title, "i") } })
+      .populate("characters", ["_id", "name"])
+      .populate("planets", ["_id", "name"])
+      return film;
+   } catch (error) {
+      console.error('Error al buscar peliculas por titulo:', error);
+      throw error;
+   }
+};
+
+
 filmSchema.statics.insert = async function (film) {
    return await this.create(film)
 };

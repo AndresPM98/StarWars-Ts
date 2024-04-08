@@ -36,43 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = require("axios");
-var baseUrl = 'http://localhost:8005/Character';
-var getData = function (url) { return __awaiter(void 0, void 0, void 0, function () {
-    var response;
+var data_1 = require("../data");
+var utils_1 = require("../../utils");
+exports.default = (function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var name_1, people, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default.get(url)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                name_1 = req.params.name;
+                return [4 /*yield*/, data_1.default.getByName(name_1)];
             case 1:
-                response = _a.sent();
-                return [2 /*return*/, response.data];
+                people = _a.sent();
+                (0, utils_1.response)(res, 200, people);
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                console.error('Error fetching people by name:', error_1);
+                (0, utils_1.response)(res, 500, { error: 'Internal Server Error' });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
-}); };
-var data = {
-    list: function () { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, getData(baseUrl)];
-                case 1:
-                    response = _a.sent();
-                    return [2 /*return*/, response];
-            }
-        });
-    }); },
-    getByName: function (name) { return __awaiter(void 0, void 0, void 0, function () {
-        var url, people;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    url = "".concat(baseUrl, "/search/").concat(name);
-                    return [4 /*yield*/, getData(url)];
-                case 1:
-                    people = _a.sent();
-                    return [2 /*return*/, people];
-            }
-        });
-    }); }
-};
-exports.default = data;
+}); });

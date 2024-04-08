@@ -39,20 +39,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var data_1 = require("../data");
 var utils_1 = require("../../utils");
 exports.default = (function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, planet, error_1;
+    var name_1, planets, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                id = parseInt(req.params.id, 10);
-                return [4 /*yield*/, data_1.default.getById(id)];
+                name_1 = req.params.name;
+                return [4 /*yield*/, data_1.default.getByName(name_1)];
             case 1:
-                planet = _a.sent();
-                (0, utils_1.response)(res, 200, planet);
+                planets = _a.sent();
+                (0, utils_1.response)(res, 200, planets);
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
-                console.error('Error fetching planet by ID:', error_1);
+                console.error('Error fetching planet by name:', error_1);
                 (0, utils_1.response)(res, 500, { error: 'Internal Server Error' });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

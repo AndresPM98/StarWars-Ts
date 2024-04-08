@@ -12,5 +12,10 @@ router.post("/:model", middleware.validateModel, controllers.createModel)
 
 router.delete("/:model/:id", middleware.validateIdModel, controllers.deleteModel)
 
+router.get("/:model/search/:name", middleware.validateModel, controllers.getModelByName);
+
+router.get("/:model/search_by/:title", middleware.validateModel, controllers.getModelByTitle);
+
+
 module.exports = router;
 

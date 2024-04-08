@@ -73,6 +73,18 @@ planetSchema.statics.get = async function (id) {
       .populate("films", ["_id", "title"])
 };
 
+planetSchema.statics.searchByName = async function (name) {
+   try {
+      const planets = await this.find({ name: { $regex: new RegExp(name, "i") } })
+      .populate("residents", ["_id", "name"])
+      .populate("films", ["_id", "title"])
+      return planets;
+   } catch (error) {
+      console.error('Error al buscar planetas por nombre:', error);
+      throw error;
+   }
+};
+
 planetSchema.statics.insert = async function (planet) {
    return await this.create(planet)
 };

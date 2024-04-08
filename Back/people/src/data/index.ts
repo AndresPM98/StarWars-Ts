@@ -26,7 +26,7 @@ interface SwapiResponse {
     results: People[];
 }
 
-const baseUrl: string = 'http://localhost:8005/Character/';
+const baseUrl: string = 'http://localhost:8005/Character';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);
@@ -37,6 +37,11 @@ const data = {
     list: async (): Promise<SwapiResponse> => {
         const response: SwapiResponse = await getData(baseUrl);
         return response;
+    },
+    getByName: async (name: string): Promise<People[]> => {
+        const url: string = `${baseUrl}/search/${name}`;
+        const people: People[] = await getData<People[]>(url);
+        return people;
     }
 };
 

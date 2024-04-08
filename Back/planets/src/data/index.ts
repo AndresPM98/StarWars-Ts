@@ -24,7 +24,7 @@ interface SwapiResponse {
     results: Planet[];
 }
 
-const baseUrl: string = 'https://swapi.dev/api/planets';
+const baseUrl: string = 'http://localhost:8005/Planet';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);
@@ -36,11 +36,12 @@ const data = {
         const response: SwapiResponse = await getData(baseUrl);
         return response;
     },
-    getById: async (id: number): Promise<Planet> => {
-        const url: string = `${baseUrl}/${id}`;
-        const planet: Planet = await getData<Planet>(url);
-        return planet;
+    getByName: async (name: string): Promise<Planet[]> => {
+        const url: string = `${baseUrl}/search/${name}`;
+        const planets: Planet[] = await getData<Planet[]>(url);
+        return planets;
     }
 };
 
 export default data;
+

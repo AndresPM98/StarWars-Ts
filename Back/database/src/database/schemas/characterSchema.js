@@ -73,6 +73,18 @@ characterSchema.statics.get = async function (id) {
       .populate("films", ["_id", "title"])
 };
 
+characterSchema.statics.searchByName = async function (name) {
+   try {
+      const character = await this.find({ name: { $regex: new RegExp(name, "i") } })
+      .populate("homeworld", ["_id", "name"])
+      .populate("films", ["_id", "title"])
+      return character;
+   } catch (error) {
+      console.error('Error al buscar personas por nombre:', error);
+      throw error;
+   }
+};
+
 characterSchema.statics.insert = async function (character) {
    return await this.create(character)
 };

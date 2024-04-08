@@ -4,5 +4,5 @@ var express_1 = require("express");
 var controllers_1 = require("../controllers"); // Importa el objeto controllers
 var router = (0, express_1.Router)();
 router.get('/', controllers_1.default.getPlanets); // Usa controllers.getPlanets
-router.get('/:id', controllers_1.default.getPlanetById); // Usa controllers.getPlanetById
+router.get('/:name', controllers_1.default.getPlanetByName);
 exports.default = router;

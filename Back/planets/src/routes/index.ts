@@ -4,7 +4,6 @@ import controllers from '../controllers'; // Importa el objeto controllers
 const router = Router();
 
 router.get('/', controllers.getPlanets); // Usa controllers.getPlanets
-router.get('/:id', controllers.getPlanetById); // Usa controllers.getPlanetById
+router.get('/:name', controllers.getPlanetByName); 
 
 export default router;
-

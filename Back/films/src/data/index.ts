@@ -24,7 +24,7 @@ interface SwapiResponse {
     results: Film[];
 }
 
-const baseUrl: string = 'http://localhost:8005/Film/';
+const baseUrl: string = 'http://localhost:8005/Film';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);
@@ -35,6 +35,11 @@ const data = {
     list: async (): Promise<SwapiResponse> => {
         const response: SwapiResponse = await getData(baseUrl);
         return response;
+    },
+    getByTitle: async (title: string): Promise<Film[]> => {
+        const url: string = `${baseUrl}/search_by/${title}`;
+        const film: Film[] = await getData<Film[]>(url);
+        return film;
     }
 };
 

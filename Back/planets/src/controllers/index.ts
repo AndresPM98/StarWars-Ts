@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { catchedAsync } from '../../utils';
-import getPlanetById from './getPlanetById';
+import getPlanetByName from './getPlanetByName';
 import getPlanets from './getPlanets';
 
 interface Controller {
@@ -8,8 +8,8 @@ interface Controller {
 }
 
 const controllers: Controller = {
-    getPlanetById: catchedAsync(getPlanetById),
     getPlanets: catchedAsync(getPlanets),
+    getPlanetByName: catchedAsync(getPlanetByName),
 };
 
 export default controllers;

@@ -10,18 +10,13 @@ La carpeta Back contiene los servidores de la aplicación desarrollados en Node.
 
 Para inicializar los servidores, sigue los siguientes pasos:
 
-1) Abre la terminal en la carpeta Back/gateway.
-2) Ejecuta el siguiente comando para instalar las dependencias:
+1) Ejecutar en cada microservicio (database, films, gateway people, planets y starships) -- pnpm i --,
+y en todos los microservicios menos en database ejecutar -- pnpm run build --.
 
-    npm install 
+2) Si no tienes creada la red debes crearla con el comando 'docker network create starwars' 
 
-3) Luego, ejecuta el siguiente comando para instalar los microservicios:
-
-    npm run install-microservices
-
-4) Finalmente, ejecuta el siguiente comando para iniciar los servidores:
-
-    npm start
+3) Una vez creadas las carpetas node_modules y dist, en la terminal de la carpeta "Backend" ejecutar 
+'docker-compose up'.
 
 Una vez completados estos pasos, los servidores estarán en funcionamiento.
 

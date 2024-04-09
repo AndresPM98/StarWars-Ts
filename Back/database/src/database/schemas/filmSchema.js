@@ -22,6 +22,15 @@ filmSchema.statics.list = async function () {
    }
 };
 
+filmSchema.statics.update = async function (id, newData) {
+   try {
+      const updatedFilm = await this.findByIdAndUpdate(id, newData, { new: true });
+      return updatedFilm;
+   } catch (error) {
+      console.error('Error al actualizar película en la base de datos:', error);
+      throw error;
+   }
+};
 
 filmSchema.statics.get = async function (id) {
    return await this.findById(id)

@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  gateway:
+    container_name: gateway
+    restart: always
+    build: ./gateway
+    ports:
+      - "8000:8000"
+  
+  films:
+    container_name: films
+    restart: always
+    build: ./films
+    ports:
+      - "8001:8001"
+
+  people:
+    container_name: people
+    restart: always
+    build: ./people
+    ports:
+      - "8002:8002"
+
+  planets:
+    container_name: planets
+    restart: always
+    build: ./planets
+    ports:
+      - "8003:8003"
+  
+  starships:
+    container_name: starships
+    restart: always
+    build: ./starships
+    ports:
+      - "8004:8004"
+  
+  database:
+    container_name: database
+    restart: always
+    build: ./database
+    ports:
+      - "8005:8005"

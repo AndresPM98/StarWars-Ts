@@ -24,7 +24,7 @@ interface SwapiResponse {
     results: Film[];
 }
 
-const baseUrl: string = 'http://localhost:8005/Film';
+const baseUrl: string = 'http://database:8005/Film';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);

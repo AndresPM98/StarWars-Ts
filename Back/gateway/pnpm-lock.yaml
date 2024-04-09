@@ -25,6 +25,9 @@ devDependencies:
   '@types/morgan':
     specifier: ^1.9.9
     version: 1.9.9
+  '@types/node':
+    specifier: ^20.12.6
+    version: 20.12.6
   nodemon:
     specifier: ^3.1.0
     version: 3.1.0

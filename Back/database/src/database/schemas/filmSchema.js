@@ -14,47 +14,14 @@ const filmSchema = new Schema({
 
 filmSchema.statics.list = async function () {
    try {
-      // Realizar solicitud GET a la API externa
-      const response = await axios.get('https://swapi.dev/api/films');
-
-      const films = await Promise.all(response.data.results.map(async filmData => {
-         // Verificar si la película ya existe en la base de datos local
-         const existingFilm = await this.findOne({ _id: filmData.episode_id });
-         if (!existingFilm) {
-            // Si la película no existe, crear una nueva instancia y la guardar en la base de datos
-            const newFilm = await this.create({
-               _id: filmData.episode_id,
-               title: filmData.title,
-               opening_crawl: filmData.opening_crawl,
-               director: filmData.director,
-               producer: filmData.producer,
-               release_date: new Date(filmData.release_date),
-               characters: filmData.characters.map(character => character.split('/').slice(-2, -1)[0]),
-               planets: filmData.planets.map(planet => planet.split('/').slice(-2, -1)[0])
-            });
-            return newFilm;
-         } else {
-            // Si la película ya existe, actualiza sus datos
-            existingFilm.set({
-               title: filmData.title,
-               opening_crawl: filmData.opening_crawl,
-               director: filmData.director,
-               producer: filmData.producer,
-               release_date: new Date(filmData.release_date),
-               characters: filmData.characters.map(character => character.split('/').slice(-2, -1)[0]),
-               planets: filmData.planets.map(planet => planet.split('/').slice(-2, -1)[0])
-            });
-            await existingFilm.save();
-            return existingFilm;
-         }
-      }));
-
+      const films = await this.find();
       return films;
    } catch (error) {
-      console.error('Error al obtener películas desde la API:', error);
+      console.error('Error al obtener películas desde la base de datos:', error);
       throw error;
    }
 };
+
 
 filmSchema.statics.get = async function (id) {
    return await this.findById(id)

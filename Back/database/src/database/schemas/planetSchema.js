@@ -17,50 +17,10 @@ const planetSchema = new Schema({
 
 planetSchema.statics.list = async function () {
    try {
-
-      const response = await axios.get('https://swapi.dev/api/planets');
-
-      const planets = await Promise.all(response.data.results.map(async planetData => {
-         // Verificar si el planeta ya existe en la base de datos local
-         const existingPlanet = await this.findOne({ _id: planetData.url.split('/').slice(-2, -1)[0] });
-         if (!existingPlanet) {
-            // Si el planeta no existe, crear una nueva instancia y lo guardar en la base de datos
-            const newPlanet = await this.create({
-               _id: planetData.url.split('/').slice(-2, -1)[0],
-               name: planetData.name,
-               rotation_period: planetData.rotation_period,
-               orbital_period: planetData.orbital_period,
-               diameter: planetData.diameter,
-               climate: planetData.climate,
-               gravity: planetData.gravity,
-               terrain: planetData.terrain,
-               surface_water: planetData.surface_water,
-               residents: planetData.residents.map(resident => resident.split('/').slice(-2, -1)[0]),
-               films: planetData.films.map(film => film.split('/').slice(-2, -1)[0])
-            });
-            return newPlanet;
-         } else {
-            // Si el planeta ya existe, actualiza sus datos
-            existingPlanet.set({
-               name: planetData.name,
-               rotation_period: planetData.rotation_period,
-               orbital_period: planetData.orbital_period,
-               diameter: planetData.diameter,
-               climate: planetData.climate,
-               gravity: planetData.gravity,
-               terrain: planetData.terrain,
-               surface_water: planetData.surface_water,
-               residents: planetData.residents.map(resident => resident.split('/').slice(-2, -1)[0]),
-               films: planetData.films.map(film => film.split('/').slice(-2, -1)[0])
-            });
-            await existingPlanet.save();
-            return existingPlanet;
-         }
-      }));
-
+      const planets = await this.find();
       return planets;
    } catch (error) {
-      console.error('Error al obtener planetas desde la API:', error);
+      console.error('Error al obtener personas desde la base de datos:', error);
       throw error;
    }
 };

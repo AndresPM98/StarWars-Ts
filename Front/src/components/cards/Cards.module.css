@@ -1,0 +1,47 @@
+.filmCard {
+    width: 50rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 1.25rem;
+    margin-block: 1.25rem;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .generalCard {
+    width: 30rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 1.25rem;
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+  .imageContainer {
+    margin-right: 1.25rem;
+  }
+  
+  .image {
+    width: 120px;
+    height: auto;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+
+  .hoverEffect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+}
+  

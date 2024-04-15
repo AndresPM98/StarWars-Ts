@@ -2,12 +2,14 @@ FROM node:16
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json pnpm-lock.yaml ./
 
-RUN npm install 
+RUN npm install -g pnpm && \
+    npm install -D typescript && \
+    pnpm install
 
 COPY . .
 
 EXPOSE 8005
 
-CMD [ "npm", "start" ]
+CMD [ "pnpm", "start" ]

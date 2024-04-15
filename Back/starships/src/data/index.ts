@@ -29,7 +29,7 @@ interface SwapiResponse {
     results: Starship[];
 }
 
-const baseUrl: string = 'https://swapi.dev/api/starships';
+const baseUrl: string = 'http://database:8005/starships';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);

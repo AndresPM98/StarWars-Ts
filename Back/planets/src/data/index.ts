@@ -24,7 +24,7 @@ interface SwapiResponse {
     results: Planet[];
 }
 
-const baseUrl: string = 'http://database:8005/Planet';
+const baseUrl: string = 'http://database:8005/planets';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);

@@ -1,4 +1,4 @@
-.loader_wrapper {
+.loaderWrapper {
     display: inline-block;
     position: relative;
     filter: drop-shadow(0 0 1px yellow);
@@ -26,7 +26,6 @@
     stroke: black;
     stroke-width: 30;
     fill: transparent;
-
     stroke-dasharray: 100px 5px;
     animation: spin 1s ease-in-out infinite alternate;
 }

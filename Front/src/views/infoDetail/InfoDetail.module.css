@@ -1,0 +1,45 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    padding: 1rem;
+    background-color: black;
+}
+
+.button {
+    background-color: #FFD700;
+    height: 2rem;
+    width: 5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    height: 90%;
+    width: 40%;
+    padding: 0.75rem;
+    border: 4px solid #FFD700;
+    border-radius: 0.5rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.director {
+    font-size: 1.5rem;
+}
+
+.producer {
+    font-size: 1rem;
+}
+
+.crawl {
+    font-size: 1rem;
+    margin-top: 1rem;
+}

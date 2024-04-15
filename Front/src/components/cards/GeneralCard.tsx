@@ -1,6 +1,7 @@
-import { People } from "../../redux/people/peopleSlice";
-import { Planet } from "../../redux/planets/planetsSlice";
-import { Starship } from "../../redux/starships/starshipsSlice";
+import { People } from '../../redux/people/peopleSlice';
+import { Planet } from '../../redux/planets/planetsSlice';
+import { Starship } from '../../redux/starships/starshipsSlice';
+import styles from './Cards.module.css';
 
 interface GeneralCardProps {
     people?: People;
@@ -17,17 +18,17 @@ export function GeneralCard({
 }: GeneralCardProps) {
     return (
         <div
-            className="w-[30rem] bg-white border rounded-md p-5 mb-5 flex cursor-pointer hover:transform hover:scale-105 hover:shadow-md"
+            className={`${styles.generalCard} ${styles.hoverEffect}`}
             onClick={onClick}
         >
-            <h1 className="text-lg font-bold">
+            <h1 className={styles.title}>
                 {people
                     ? people.name
                     : planet
                     ? planet.name
                     : starship
                     ? starship.name
-                    : "N/A"}
+                    : 'N/A'}
             </h1>
         </div>
     );

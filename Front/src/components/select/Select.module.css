@@ -1,0 +1,9 @@
+.select {
+    height: 2rem;
+    width: 10rem;
+    border-radius: 0.25rem;
+    padding-inline: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  

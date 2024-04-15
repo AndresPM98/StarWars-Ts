@@ -1,4 +1,5 @@
 import { Film } from "../../redux/films/filmsSlice";
+import styles from "./Cards.module.css";
 import StarWars1 from "../../assets/starwars1.jpg";
 import StarWars2 from "../../assets/starwars2.jpg";
 import StarWars3 from "../../assets/starwars3.jpg";
@@ -12,26 +13,26 @@ interface FilmCardProps {
 }
 
 const episodeImages: Record<string, string> = {
-    '1': StarWars1,
-    '2': StarWars2,
-    '3': StarWars3,
-    '4': StarWars4,
-    '5': StarWars5,
-    '6': StarWars6,
+    'The Phantom Menace': StarWars1,
+    'Attack of the Clones':  StarWars2,
+    'Revenge of the Sith': StarWars3,
+    'A New Hope': StarWars4,
+    'The Empire Strikes Back': StarWars5,
+    'Return of the Jedi': StarWars6,
 };
 
 export function FilmCard({ film, onClick }: FilmCardProps) {
-    const episodeId = film._id.toString();
-    const episodeImage = episodeImages[episodeId] || StarWars1;
+    const episodeName = film?.title;
+    const episodeImage = episodeImages[episodeName] || StarWars1;
 
     return (
-        <div className="w-[50rem] bg-white border rounded-md p-5 mb-5 flex cursor-pointer hover:transform hover:scale-105 hover: shadow-md" onClick={onClick}>
-            <div className="mr-5">
-                <img className="w-[800px] h-auto" src={episodeImage} alt={`Star Wars Episode ${episodeId}`} />
+        <div className={`${styles.filmCard} ${styles.hoverEffect}`} onClick={onClick}>
+            <div className={styles.imageContainer}>
+                <img className={styles.image} src={episodeImage} alt={`Star Wars Episode ${episodeName}`} />
             </div>
             <div>
-                <h1 className="text-lg font-bold">{film.title}</h1>
-                <div className="text-md">{film.opening_crawl}</div>
+                <h1 className={styles.title}>{film.title}</h1>
+                <div className={styles.description}>{film.opening_crawl}</div>
             </div>
         </div>
     );

@@ -29,7 +29,8 @@ interface SwapiResponse {
     results: Starship[];
 }
 
-const baseUrl: string = 'http://database:8005/starships';
+const baseUrl: string = 'http://database:8005';
+const filmsEndpoint: string = '/starships';
 
 const getData = async <T>(url: string): Promise<T> => {
     const response: AxiosResponse<T> = await axios.get(url);
@@ -38,8 +39,13 @@ const getData = async <T>(url: string): Promise<T> => {
 
 const data = {
     list: async (): Promise<SwapiResponse> => {
-        const response: SwapiResponse = await getData(baseUrl);
+        const response: SwapiResponse = await getData<SwapiResponse>(`${baseUrl}${filmsEndpoint}`);
         return response;
+    },
+    getByName: async (name: string): Promise<Starship[]> => {
+        const url: string = `${baseUrl}${filmsEndpoint}/${encodeURIComponent(name)}`;
+        const starship: Starship[] = await getData<Starship[]>(url);
+        return starship;
     }
 };
 

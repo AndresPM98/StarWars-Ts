@@ -1,3 +1,4 @@
+// starshipModel.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 interface Starship extends Document {

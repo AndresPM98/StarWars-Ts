@@ -1,23 +1,23 @@
 import { Request, Response } from "express";
-import Film from "../../models/film";
+import People from "../../models/people";
 
-export async function getFilmByTitle(
+export async function getPeopleByName(
     req: Request,
     res: Response
 ): Promise<void> {
     try {
-        const title = req.params.title;
+        const name = req.params.name;
         // Buscar la película por título en la base de datos
-        const film = await Film.findOne({ title });
+        const people = await People.findOne({ name });
 
-        if (!film) {
+        if (!people) {
             // Si la película no se encuentra, devolver un mensaje de error
-            res.status(404).json({ message: "Película no encontrada" });
+            res.status(404).json({ message: "Persona no encontrada" });
             return;
         }
 
         // Si se encuentra la película, devolverla como respuesta
-        res.json(film);
+        res.json(people);
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }

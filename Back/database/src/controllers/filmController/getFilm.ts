@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Request, Response } from 'express'; 
+import { Request, Response } from 'express';
 import Film from '../../models/film';
 
 export async function fetchAndSaveFilms(req: Request, res: Response): Promise<void> {
@@ -39,7 +39,7 @@ export async function fetchAndSaveFilms(req: Request, res: Response): Promise<vo
       return newMovie.save();
     }));
 
-    res.json(savedMovies.filter((movie) => movie)); // Filtrar las películas guardadas con éxito
+    res.json(savedMovies.filter((movie: any) => movie)); // Filtrar las películas guardadas con éxito
   } catch (error: any) { // Especifica el tipo de la variable error como any
     res.status(500).json({ message: error.message });
   }

@@ -1,3 +1,4 @@
+// filmModel.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 interface Film extends Document {

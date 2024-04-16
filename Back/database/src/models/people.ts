@@ -1,3 +1,4 @@
+// peopleModel.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 interface People extends Document {

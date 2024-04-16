@@ -3,16 +3,17 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import movieRoutes from './routes/index';
 const { ServerApiVersion } = require('mongodb');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
 
 // Conexión a la base de datos MongoDB con opciones de ServerApiVersion
-mongoose.connect('mongodb+srv://andresperezmerello:Andres1998@starwars.qekgpdq.mongodb.net/', {
+mongoose.connect(process.env.MONGODB_URI as string, {
   serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
   }
 });
 

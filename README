@@ -10,13 +10,15 @@ La carpeta Back contiene los servidores de la aplicación desarrollados en Node.
 
 Para inicializar los servidores, sigue los siguientes pasos:
 
-1) Ejecutar en cada microservicio (database, films, gateway people, planets y starships) -- pnpm i --.
+1) En el microservicio de "database", crear un archivo .env con la variable "MONGODB_URI" que contendra la ruta de conexión de MongoDB. Por ej: (MONGODB_URI = mongodb+srv://andresperezmerello:<password>@starwars.qekgpdq.mongodb.net/).
 
-2) Ejecutar en cada microservicio (database, films, gateway people, planets y starships) -- pnpm run build --
+2) Ejecutar en cada microservicio (database, films, gateway people, planets y starships) -- pnpm i --.
 
-3) Si no tienes creada la red debes crearla con el comando 'docker network create starwars' 
+3) Ejecutar en cada microservicio (database, films, gateway people, planets y starships) -- pnpm run build --
 
-4) Una vez creadas las carpetas node_modules y dist, en la terminal de la carpeta "Back" ejecutar 
+4) Si no tienes creada la red debes crearla con el comando 'docker network create starwars' 
+
+5) Una vez creadas las carpetas node_modules y dist, en la terminal de la carpeta "Back" ejecutar 
     -- docker-compose up --.
 
 Una vez completados estos pasos, los servidores estarán en funcionamiento.

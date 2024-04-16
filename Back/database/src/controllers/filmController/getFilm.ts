@@ -8,42 +8,42 @@ export async function fetchAndSaveFilms(
 ): Promise<void> {
     try {
         // Verificar si existen películas en la base de datos
-        const moviesInDB = await Film.find();
-        if (moviesInDB.length > 0) {
+        const filmsInDB = await Film.find();
+        if (filmsInDB.length > 0) {
             // Si existen películas en la base de datos las devuelve como respuesta
-            res.json(moviesInDB);
+            res.json(filmsInDB);
             return; 
         }
 
         // Si no hay películas en la base de datos, hacer una solicitud a la API de Star Wars para obtenerlas
         const response = await axios.get("https://swapi.dev/api/films/");
-        const moviesData = response.data.results;
+        const filmsData = response.data.results;
 
         // Guardar las películas en la base de datos
-        const savedMovies = await Promise.all(
-            moviesData.map(async (movie: any) => {
-                const newMovie = new Film({
-                    title: movie.title,
-                    episodeId: movie.episode_id,
-                    openingCrawl: movie.opening_crawl,
-                    director: movie.director,
-                    producer: movie.producer,
-                    releaseDate: new Date(movie.release_date),
-                    characters: movie.characters,
-                    planets: movie.planets,
-                    starships: movie.starships,
-                    vehicles: movie.vehicles,
-                    species: movie.species,
-                    created: new Date(movie.created),
-                    edited: new Date(movie.edited),
-                    url: movie.url,
+        const savedFilms = await Promise.all(
+            filmsData.map(async (film: any) => {
+                const newFilm = new Film({
+                    title: film.title,
+                    episodeId: film.episode_id,
+                    openingCrawl: film.opening_crawl,
+                    director: film.director,
+                    producer: film.producer,
+                    releaseDate: new Date(film.release_date),
+                    characters: film.characters,
+                    planets: film.planets,
+                    starships: film.starships,
+                    vehicles: film.vehicles,
+                    species: film.species,
+                    created: new Date(film.created),
+                    edited: new Date(film.edited),
+                    url: film.url,
                 });
                 // Guardar la nueva película en la base de datos
-                return newMovie.save();
+                return newFilm.save();
             })
         );
 
-        res.json(savedMovies.filter((movie: any) => movie)); 
+        res.json(savedFilms.filter((film: any) => film)); 
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }

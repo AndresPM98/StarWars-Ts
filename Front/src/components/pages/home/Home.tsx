@@ -3,28 +3,28 @@ import {
     Film,
     fetchFilmByTitle,
     selectSingleFilm,
-} from "../../redux/films/filmsSlice";
+} from "../../../redux/films/filmsSlice";
 import {
     People,
     fetchPeopleByName,
     selectSinglePeople,
-} from "../../redux/people/peopleSlice";
+} from "../../../redux/people/peopleSlice";
 import {
     Planet,
     fetchPlanetByName,
     selectSinglePlanet,
-} from "../../redux/planets/planetsSlice";
+} from "../../../redux/planets/planetsSlice";
 import {
     Starship,
     fetchStarshipByName,
     selectSingleStarship,
-} from "../../redux/starships/starshipsSlice";
-import { FilmCard } from "../../components/cards/FilmCard";
-import { GeneralCard } from "../../components/cards/GeneralCard";
+} from "../../../redux/starships/starshipsSlice";
+import { FilmCard } from "../../molecules/cards/FilmCard";
+import { GeneralCard } from "../../molecules/cards/GeneralCard";
 import { InfoDetail } from "../infoDetail/InfoDetail";
-import { Select } from "../../components/select/Select";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { Loader } from "../../components/loader/Loader";
+import { Select } from "../../atoms/select/Select";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { Loader } from "../../atoms/loader/Loader";
 import styles from "./Home.module.css";
 
 export function Home({

@@ -1,11 +1,11 @@
-import { Film } from "../../redux/films/filmsSlice";
+import { Film } from "../../../redux/films/filmsSlice";
 import styles from "./Cards.module.css";
-import StarWars1 from "../../assets/starwars1.jpg";
-import StarWars2 from "../../assets/starwars2.jpg";
-import StarWars3 from "../../assets/starwars3.jpg";
-import StarWars4 from "../../assets/starwars4.jpg";
-import StarWars5 from "../../assets/starwars5.jpg";
-import StarWars6 from "../../assets/starwars6.jpg";
+import StarWars1 from "../../../assets/starwars1.jpg";
+import StarWars2 from "../../../assets/starwars2.jpg";
+import StarWars3 from "../../../assets/starwars3.jpg";
+import StarWars4 from "../../../assets/starwars4.jpg";
+import StarWars5 from "../../../assets/starwars5.jpg";
+import StarWars6 from "../../../assets/starwars6.jpg";
 
 interface FilmCardProps {
     film: Film;

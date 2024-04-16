@@ -4,9 +4,9 @@ import { fetchAllFilms, selectAllFilms, Film } from "./redux/films/filmsSlice";
 import { fetchPeople, selectPeople, People } from "./redux/people/peopleSlice";
 import { fetchPlanets, selectPlanets, Planet } from "./redux/planets/planetsSlice";
 import { fetchStarships, selectStarships, Starship } from "./redux/starships/starshipsSlice";
-import { Loader } from "./components/loader/Loader";
+import { Loader } from "./components/atoms/loader/Loader";
 import StarWarsImg from "../src/assets/starwars.jpeg";
-import { Home } from "./views/home/Home";
+import { Home } from "./components/pages/home/Home";
 import styles from "./App.module.css";
 
 function App() {

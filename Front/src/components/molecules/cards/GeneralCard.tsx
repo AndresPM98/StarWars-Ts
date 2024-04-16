@@ -1,6 +1,6 @@
-import { People } from '../../redux/people/peopleSlice';
-import { Planet } from '../../redux/planets/planetsSlice';
-import { Starship } from '../../redux/starships/starshipsSlice';
+import { People } from '../../../redux/people/peopleSlice';
+import { Planet } from '../../../redux/planets/planetsSlice';
+import { Starship } from '../../../redux/starships/starshipsSlice';
 import styles from './Cards.module.css';
 
 interface GeneralCardProps {

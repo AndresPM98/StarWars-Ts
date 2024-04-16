@@ -1,7 +1,7 @@
-import { Film } from "../../redux/films/filmsSlice";
-import { People } from "../../redux/people/peopleSlice";
-import { Planet } from "../../redux/planets/planetsSlice";
-import { Starship } from "../../redux/starships/starshipsSlice";
+import { Film } from "../../../redux/films/filmsSlice";
+import { People } from "../../../redux/people/peopleSlice";
+import { Planet } from "../../../redux/planets/planetsSlice";
+import { Starship } from "../../../redux/starships/starshipsSlice";
 import styles from "./InfoDetail.module.css";
 
 interface InfoDetailProps {

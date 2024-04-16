@@ -17,27 +17,44 @@ export async function fetchAndSavePlanets(
 
         // Si no hay planetas en la base de datos, hacer una solicitud a la API de Star Wars para obtenerlos
         const response = await axios.get("https://swapi.dev/api/planets/");
+        
         const planetsData = response.data.results;
+
+        // Función auxiliar para completar los valores faltantes con "n/a"
+        const completeWithNA = (value: any, field: string) => {
+            if (value !== undefined && value !== null) {
+                return value;
+            } else {
+                switch (field) {
+                    case "surface_water":
+                    case "orbital_period":
+                    case "rotation_period":
+                        return "unknown";
+                    default:
+                        return "n/a";
+                }
+            }
+        };
 
         // Guardar los planetas en la base de datos
         const savedPlanets = await Promise.all(
             planetsData.map(async (planet: any) => {
                 // Crear una nueva instancia del modelo Planet con los datos de la API
                 const newPlanet = new Planet({
-                    name: planet.name,
-                    rotationPeriod: planet.rotation_period,
-                    orbitalPeriod: planet.orbital_period,
-                    diameter: planet.diameter,
-                    climate: planet.climate,
-                    gravity: planet.gravity,
-                    terrain: planet.terrain,
-                    surfaceWater: planet.surface_water,
-                    population: planet.population,
-                    residents: planet.residents,
-                    films: planet.films,
+                    name: completeWithNA(planet.name, "name"),
+                    rotation_period: completeWithNA(planet.rotation_period, "rotation_period"),
+                    orbital_period: completeWithNA(planet.orbital_period, "orbital_period"),
+                    diameter: completeWithNA(planet.diameter, "diameter"),
+                    climate: completeWithNA(planet.climate, "climate"),
+                    gravity: completeWithNA(planet.gravity, "gravity"),
+                    terrain: completeWithNA(planet.terrain, "terrain"),
+                    surface_water: completeWithNA(planet.surface_water, "surface_water"),
+                    population: completeWithNA(planet.population, "population"),
+                    residents: completeWithNA(planet.residents, "residents"),
+                    films: completeWithNA(planet.films, "films"),
                     created: new Date(planet.created),
                     edited: new Date(planet.edited),
-                    url: planet.url,
+                    url: completeWithNA(planet.url, "url"),
                 });
                 // Guardar el nuevo planeta en la base de datos
                 return newPlanet.save();

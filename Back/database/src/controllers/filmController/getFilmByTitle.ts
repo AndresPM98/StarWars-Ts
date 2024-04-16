@@ -12,7 +12,7 @@ export async function getFilmByTitle(
 
         if (!film) {
             // Si la película no se encuentra, devolver un mensaje de error
-            res.status(404).json({ message: "Película no encontrada" });
+            res.status(404).json({ message: "Film not found" });
             return;
         }
 

@@ -19,44 +19,32 @@ export async function fetchAndSaveStarships(
         const response = await axios.get("https://swapi.dev/api/starships/");
         const starshipsData = response.data.results;
 
+        // Función auxiliar para completar los valores faltantes con "n/a"
+        const completeWithNA = (value: any) => (value ? value : "n/a");
+
         // Guardar las naves estelares en la base de datos
         const savedStarships = await Promise.all(
             starshipsData.map(async (starship: any) => {
-                // Verificar si los campos requeridos están presentes en los datos
-                if (
-                    !starship.starship_class ||
-                    !starship.hyperdrive_rating ||
-                    !starship.cargo_capacity ||
-                    !starship.max_atmosphering_speed ||
-                    !starship.cost_in_credits
-                ) {
-                    // Si falta alguno de los campos requeridos, omitir esta nave estelar
-                    console.log(
-                        `Nave estelar omitida debido a datos incompletos: ${starship.name}`
-                    );
-                    return null;
-                }
-
                 // Crear una nueva instancia del modelo Starship con los datos de la API
                 const newStarship = new Starship({
-                    name: starship.name,
-                    model: starship.model,
-                    manufacturer: starship.manufacturer,
-                    cost_in_credits: starship.cost_in_credits,
-                    length: starship.length,
-                    max_atmosphering_speed: starship.max_atmosphering_speed,
-                    crew: starship.crew,
-                    passengers: starship.passengers,
-                    cargo_capacity: starship.cargo_capacity,
-                    consumables: starship.consumables,
-                    hyperdrive_rating: starship.hyperdrive_rating,
-                    MGLT: starship.MGLT,
-                    starship_class: starship.starship_class,
-                    pilots: starship.pilots,
-                    films: starship.films,
+                    name: completeWithNA(starship.name),
+                    model: completeWithNA(starship.model),
+                    manufacturer: completeWithNA(starship.manufacturer),
+                    cost_in_credits: completeWithNA(starship.cost_in_credits),
+                    length: completeWithNA(starship.length),
+                    max_atmosphering_speed: completeWithNA(starship.max_atmosphering_speed),
+                    crew: completeWithNA(starship.crew),
+                    passengers: completeWithNA(starship.passengers),
+                    cargo_capacity: completeWithNA(starship.cargo_capacity),
+                    consumables: completeWithNA(starship.consumables),
+                    hyperdrive_rating: completeWithNA(starship.hyperdrive_rating),
+                    MGLT: completeWithNA(starship.MGLT),
+                    starship_class: completeWithNA(starship.starship_class),
+                    pilots: completeWithNA(starship.pilots),
+                    films: completeWithNA(starship.films),
                     created: new Date(starship.created),
                     edited: new Date(starship.edited),
-                    url: starship.url,
+                    url: completeWithNA(starship.url),
                     // Agregar otros campos necesarios aquí
                 });
 

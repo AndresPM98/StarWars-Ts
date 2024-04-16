@@ -24,7 +24,7 @@ export function InfoDetail({ selectedItem, onClick }: InfoDetailProps) {
                                 <h1 className={styles.title}>{selectedItem.title}</h1>
                                 <h2 className={styles.director}>{selectedItem.director}</h2>
                                 <h3 className={styles.producer}>{selectedItem.producer}</h3>
-                                <p className={styles.crawl}>{selectedItem.opening_crawl}</p>
+                                <p className={styles.crawl}>{selectedItem.openingCrawl}</p>
                             </>
                         )}
                         {("name" in selectedItem) && (

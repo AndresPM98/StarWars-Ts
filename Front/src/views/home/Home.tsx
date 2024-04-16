@@ -14,7 +14,11 @@ import {
     fetchPlanetByName,
     selectSinglePlanet,
 } from "../../redux/planets/planetsSlice";
-import { Starship } from "../../redux/starships/starshipsSlice";
+import {
+    Starship,
+    fetchStarshipByName,
+    selectSingleStarship,
+} from "../../redux/starships/starshipsSlice";
 import { FilmCard } from "../../components/cards/FilmCard";
 import { GeneralCard } from "../../components/cards/GeneralCard";
 import { InfoDetail } from "../infoDetail/InfoDetail";
@@ -45,6 +49,9 @@ export function Home({
     const planetByName: Planet[] = useAppSelector((state) =>
         selectSinglePlanet(state)
     ) as Planet[];
+    const starshipByName: Starship[] = useAppSelector((state) =>
+        selectSingleStarship(state)
+    ) as Starship[];
 
     const [loading, setLoading] = useState(true);
     const [renderDetail, setRenderDetail] = useState(false);
@@ -106,6 +113,13 @@ export function Home({
             } catch (error) {
                 console.error("Error al buscar planetas por nombre:", error);
             }
+        } else if (selectedOption === "Starships") {
+            try {
+                setLoading(true);
+                await dispatch(fetchStarshipByName(searchName));
+            } catch (error) {
+                console.error("Error al buscar nave por nombre:", error);
+            }
         }
     };
 
@@ -117,7 +131,12 @@ export function Home({
             starships.length > 0
         ) {
             setLoading(false);
-        } else if (filmByTitle || peopleByName || planetByName) {
+        } else if (
+            filmByTitle ||
+            peopleByName ||
+            planetByName ||
+            starshipByName
+        ) {
             setLoading(false);
         }
     }, [
@@ -129,6 +148,7 @@ export function Home({
         filmByTitle,
         peopleByName,
         planetByName,
+        starshipByName,
     ]);
 
     let componentToRender;
@@ -215,7 +235,15 @@ export function Home({
     } else if (selectedOption === "Starships") {
         componentToRender = (
             <div className={styles.content}>
-                {starships.length > 0 ? (
+                {starshipByName ? (
+                    starshipByName.map((starship, index) => (
+                        <GeneralCard
+                            key={index}
+                            starship={starship}
+                            onClick={() => handleClick(starship)}
+                        />
+                    ))
+                ) : starships.length > 0 ? (
                     starships.map((starship, index) => (
                         <GeneralCard
                             key={index}
@@ -279,6 +307,23 @@ export function Home({
                             </form>
                         )}
                         {selectedOption === "Planets" && (
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    value={searchName}
+                                    onChange={handleInputNameChange}
+                                    className={styles.searchInput}
+                                    placeholder="Buscar por nombre"
+                                />
+                                <button
+                                    type="submit"
+                                    className={styles.searchButton}
+                                >
+                                    Buscar
+                                </button>
+                            </form>
+                        )}
+                        {selectedOption === "Starships" && (
                             <form onSubmit={handleSubmit}>
                                 <input
                                     type="text"

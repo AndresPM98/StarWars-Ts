@@ -32,7 +32,7 @@ export function FilmCard({ film, onClick }: FilmCardProps) {
             </div>
             <div>
                 <h1 className={styles.title}>{film.title}</h1>
-                <div className={styles.description}>{film.opening_crawl}</div>
+                <div className={styles.description}>{film.openingCrawl}</div>
             </div>
         </div>
     );

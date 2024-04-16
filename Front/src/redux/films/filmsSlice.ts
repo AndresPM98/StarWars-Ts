@@ -3,21 +3,20 @@ import type { RootState } from '../store';
 import axios from 'axios'; 
 
 export interface Film {
-    _id: string;
-    title: string;
-    episode_id: number;
-    opening_crawl: string;
-    director: string;
-    producer: string;
-    release_date: string; 
-    characters: string[];
-    planets: string[];
-    starships: string[];
-    vehicles: string[];
-    species: string[];
-    created: string; 
-    edited: string; 
-    url: string;
+  title: string;
+  episodeId: number;
+  openingCrawl: string;
+  director: string;
+  producer: string;
+  releaseDate: Date;
+  characters: string[];
+  planets: string[];
+  starships: string[];
+  vehicles: string[];
+  species: string[];
+  created: Date;
+  edited: Date;
+  url: string;
 }
 
 interface FilmsState {
@@ -34,6 +33,8 @@ export const fetchAllFilms = createAsyncThunk(
   'films/fetchAllFilms',
   async () => {
     const response = await axios.get('http://localhost:8000/films');
+    console.log(response);
+    
     return response.data.data; 
   }
 );

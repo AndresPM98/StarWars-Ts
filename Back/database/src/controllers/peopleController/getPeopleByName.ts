@@ -5,12 +5,13 @@ export async function getPeopleByName(
     req: Request,
     res: Response
 ): Promise<void> {
+
     try {
         const name = req.params.name;
         // Buscar la película por título en la base de datos
-        const people = await People.findOne({ name });
+        const people = await People.find({ name: { $regex: name, $options: "i" } });
 
-        if (!people) {
+        if (!people || people.length === 0) {
             // Si la película no se encuentra, devolver un mensaje de error
             res.status(404).json({ message: "Persona no encontrada" });
             return;

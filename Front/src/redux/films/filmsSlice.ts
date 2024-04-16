@@ -43,6 +43,8 @@ export const fetchFilmByTitle = createAsyncThunk(
   'films/fetchFilmByTitle',
   async (title: string) => {
     const response = await axios.get(`http://localhost:8000/films/${encodeURIComponent(title)}`);
+    console.log(response);
+    
     return response.data.data; 
   }
 );

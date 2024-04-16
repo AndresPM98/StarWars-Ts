@@ -8,9 +8,9 @@ export async function getStarshipByName(
     try {
         const name = req.params.name;
         // Buscar la película por título en la base de datos
-        const starship = await Starship.findOne({ name });
+        const starship = await Starship.find({ name: { $regex: name, $options: "i" } });
 
-        if (!starship) {
+        if (!starship || starship.length === 0) {
             // Si la película no se encuentra, devolver un mensaje de error
             res.status(404).json({ message: "Nave no encontrada" });
             return;

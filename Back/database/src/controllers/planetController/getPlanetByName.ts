@@ -8,9 +8,9 @@ export async function getPlanetByName(
     try {
         const name = req.params.name;
         // Buscar la película por título en la base de datos
-        const planet = await Planet.findOne({ name });
+        const planet = await Planet.find({ name: { $regex: name, $options: "i" } });
 
-        if (!planet) {
+        if (!planet || planet.length === 0) {
             // Si la película no se encuentra, devolver un mensaje de error
             res.status(404).json({ message: "Planeta no encontrado" });
             return;

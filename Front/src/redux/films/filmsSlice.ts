@@ -21,12 +21,12 @@ export interface Film {
 
 interface FilmsState {
     allFilms: Film[];
-    singleFilm: Film | null;
+    filterFilms: Film | null;
 }
 
 const initialState: FilmsState = {
     allFilms: [],
-    singleFilm: null,
+    filterFilms: null,
 };
 
 export const fetchAllFilms = createAsyncThunk(
@@ -62,7 +62,7 @@ const filmsSlice = createSlice({
       })
       .addCase(fetchFilmByTitle.fulfilled, (state, action) => {
         // Actualiza el estado con la película individual obtenida
-        state.singleFilm = action.payload;
+        state.filterFilms = action.payload;
       });
   },
 });
@@ -73,4 +73,4 @@ export default filmsSlice.reducer;
 
 // Define selectores
 export const selectAllFilms = (state: RootState) => state.films.allFilms;
-export const selectSingleFilm = (state: RootState) => state.films.singleFilm;
+export const selectFilterFilms = (state: RootState) => state.films.filterFilms;

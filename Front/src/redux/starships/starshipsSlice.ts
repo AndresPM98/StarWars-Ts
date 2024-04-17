@@ -25,12 +25,12 @@ export interface Starship {
 
     interface StarshipsState {
       allStarships: Starship[];
-      singleStarship: Starship | null;
+      filterStarships: Starship | null;
     }
     
     const initialState: StarshipsState = {
       allStarships: [],
-      singleStarship: null,
+      filterStarships: null,
     };
     
     export const fetchStarships = createAsyncThunk(
@@ -62,7 +62,7 @@ export interface Starship {
           state.allStarships = action.payload;
         })
         .addCase(fetchStarshipByName.fulfilled, (state, action) => {
-          state.singleStarship = action.payload;
+          state.filterStarships = action.payload;
         });
       },
     });
@@ -73,5 +73,5 @@ export interface Starship {
     
     // Define selectores 
     export const selectStarships = (state: RootState) => state.starships.allStarships;
-    export const selectSingleStarship = (state: RootState) => state.starships.singleStarship;
+    export const selectFilterStarships = (state: RootState) => state.starships.filterStarships;
     

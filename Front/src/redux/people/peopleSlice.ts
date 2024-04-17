@@ -23,12 +23,12 @@ export interface People {
 
 interface PeopleState {
   allPeople: People[];
-  singlePeople: People | null;
+  filterPeople: People | null;
 }
 
 const initialState: PeopleState = {
   allPeople: [],
-  singlePeople: null,
+  filterPeople: null,
 };
 
 export const fetchPeople = createAsyncThunk(
@@ -59,7 +59,7 @@ const peopleSlice = createSlice({
       state.allPeople = action.payload;
     })
     .addCase(fetchPeopleByName.fulfilled, (state, action) => {
-      state.singlePeople = action.payload;
+      state.filterPeople = action.payload;
     });
   },
 });
@@ -70,5 +70,5 @@ export default peopleSlice.reducer;
 
 // Define selectores 
 export const selectPeople = (state: RootState) => state.people.allPeople;
-export const selectSinglePeople = (state: RootState) => state.people.singlePeople;
+export const selectFilterPeople = (state: RootState) => state.people.filterPeople;
 

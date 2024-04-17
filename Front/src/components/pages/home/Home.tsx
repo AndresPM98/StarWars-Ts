@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import {
     Film,
     fetchFilmByTitle,
-    selectSingleFilm,
+    selectFilterFilms,
 } from "../../../redux/films/filmsSlice";
 import {
     People,
     fetchPeopleByName,
-    selectSinglePeople,
+    selectFilterPeople,
 } from "../../../redux/people/peopleSlice";
 import {
     Planet,
     fetchPlanetByName,
-    selectSinglePlanet,
+    selectFilterPlanets,
 } from "../../../redux/planets/planetsSlice";
 import {
     Starship,
     fetchStarshipByName,
-    selectSingleStarship,
+    selectFilterStarships,
 } from "../../../redux/starships/starshipsSlice";
 import { FilmCard } from "../../molecules/cards/FilmCard";
 import { GeneralCard } from "../../molecules/cards/GeneralCard";
@@ -25,7 +25,7 @@ import { InfoDetail } from "../infoDetail/InfoDetail";
 import { Select } from "../../atoms/select/Select";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { Loader } from "../../atoms/loader/Loader";
-import styles from "./Home.module.css";
+import styles from "../../../styles/Page.module.css";
 
 export function Home({
     films,
@@ -41,16 +41,16 @@ export function Home({
     const dispatch = useAppDispatch();
 
     const filmByTitle: Film[] = useAppSelector((state) =>
-        selectSingleFilm(state)
+        selectFilterFilms(state)
     ) as Film[];
     const peopleByName: People[] = useAppSelector((state) =>
-        selectSinglePeople(state)
+        selectFilterPeople(state)
     ) as People[];
     const planetByName: Planet[] = useAppSelector((state) =>
-        selectSinglePlanet(state)
+        selectFilterPlanets(state)
     ) as Planet[];
     const starshipByName: Starship[] = useAppSelector((state) =>
-        selectSingleStarship(state)
+        selectFilterStarships(state)
     ) as Starship[];
 
     const [loading, setLoading] = useState(true);

@@ -21,12 +21,12 @@ export interface Planet {
 
 interface PlanetsState {
   allPlanets: Planet[];
-  singlePlanet: Planet | null;
+  filterPlanets: Planet | null;
 }
 
 const initialState: PlanetsState = {
   allPlanets: [],
-  singlePlanet: null,
+  filterPlanets: null,
 };
 
 export const fetchPlanets = createAsyncThunk(
@@ -58,7 +58,7 @@ const planetsSlice = createSlice({
       state.allPlanets = action.payload;
     })
     .addCase(fetchPlanetByName.fulfilled, (state, action) => {
-      state.singlePlanet = action.payload;
+      state.filterPlanets = action.payload;
     });
   },
 });
@@ -69,5 +69,5 @@ export default planetsSlice.reducer;
 
 // Define selectores 
 export const selectPlanets = (state: RootState) => state.planets.allPlanets;
-export const selectSinglePlanet = (state: RootState) => state.planets.singlePlanet;
+export const selectFilterPlanets = (state: RootState) => state.planets.filterPlanets;
 

@@ -1,5 +1,5 @@
 .filmCard {
-    width: 50rem;
+    width: 35rem;
     background-color: white;
     border: 1px solid #e5e7eb;
     border-radius: 0.375rem;
@@ -22,11 +22,13 @@
 }
   
   .imageContainer {
+    display: flex;
+    align-items: center;
     margin-right: 1.25rem;
   }
   
   .image {
-    width: 120px;
+    width: 150px;
     height: auto;
   }
   

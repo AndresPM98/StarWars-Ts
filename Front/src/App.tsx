@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { Routes, Route } from 'react-router-dom'; 
 import { fetchAllFilms, selectAllFilms, Film } from "./redux/films/filmsSlice";
 import { fetchPeople, selectPeople, People } from "./redux/people/peopleSlice";
 import { fetchPlanets, selectPlanets, Planet } from "./redux/planets/planetsSlice";
 import { fetchStarships, selectStarships, Starship } from "./redux/starships/starshipsSlice";
 import { Loader } from "./components/atoms/loader/Loader";
 import StarWarsImg from "../src/assets/starwars.jpeg";
-import { Home } from "./components/pages/home/Home";
+import { Films, Characters, Planets, Starships } from "./components/pages";
 import styles from "./App.module.css";
+import Navbar from "./components/organisms/navbar/Navbar";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -59,7 +61,13 @@ function App() {
 
     return (
         <div>
-            <Home films={films} people={people} planets={planets} starships={starships} />
+            <Navbar/>
+                <Routes>
+                    <Route path="/films" element={<Films films={films}  />} />
+                    <Route path="/people" element={<Characters people={people} />} />
+                    <Route path="/planets" element={<Planets planets={planets} />} />
+                    <Route path="/starships" element={<Starships starships={starships}  />} />
+                </Routes>
         </div>
     );
 }

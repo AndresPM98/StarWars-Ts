@@ -63,7 +63,7 @@ function App() {
         <div>
             <Navbar/>
                 <Routes>
-                    <Route path="/films" element={<Films films={films}  />} />
+                    <Route path="/" element={<Films films={films}  />} />
                     <Route path="/people" element={<Characters people={people} />} />
                     <Route path="/planets" element={<Planets planets={planets} />} />
                     <Route path="/starships" element={<Starships starships={starships}  />} />
